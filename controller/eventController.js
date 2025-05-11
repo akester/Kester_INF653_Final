@@ -83,9 +83,23 @@ const GetEvent = async (req, res) => {
     res.status(200).json(event);
 }
 
+const DeleteEvent = async (req, res) => {
+    const { id } = req.params;
+    const event = await Event.findById(id).exec();
+    if (!event) {
+        return res.status(404).json({ message: `no event found with id ${id}` });
+    }
+
+    const result = await Event.deleteOne({ _id: id });
+    res.json({ message: "Event deleted", result });
+
+    res.status(200).json(event);
+}
+
 
 module.exports = {
     CreateEvent,
     UpdateEvent,
     GetEvent,
+    DeleteEvent,
 }

@@ -10,6 +10,7 @@ const {
     CreateEvent,
     UpdateEvent,
     GetEvent,
+    DeleteEvent,
 } = require("../../controller/eventController");
 
 router
@@ -19,6 +20,7 @@ router
 router
     .route("/:id")
     .put(RequireAdminAuth, UpdateEvent)
+    .delete(RequireAdminAuth, DeleteEvent)
     .get(GetEvent)
 
 module.exports = router;
