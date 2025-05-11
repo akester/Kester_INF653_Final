@@ -16,4 +16,4 @@ applications:
 
 services:
   mongo:
-    type: mongodb-enterprise:7.0
+    type: mongodb:7.0
