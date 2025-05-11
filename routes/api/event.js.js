@@ -11,10 +11,12 @@ const {
     UpdateEvent,
     GetEvent,
     DeleteEvent,
+    GetAllEvents,
 } = require("../../controller/eventController");
 
 router
     .route("/")
+    .get(GetAllEvents)
     .post(RequireAdminAuth, CreateEvent)
 
 router
