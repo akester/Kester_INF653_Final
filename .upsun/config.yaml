@@ -13,3 +13,7 @@ applications:
 
     hooks:
       build: make depends
+
+    mounts: 
+      '/app/logs':
+        source: 'tmp'
