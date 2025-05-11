@@ -34,6 +34,7 @@ app.use("/", require("./routes/root.js"));
 
 app.use("/api/auth", require("./routes/api/auth.js"));
 app.use("/api/events", require("./routes/api/event.js"));
+app.use("/api/bookings", require("./routes/api/bookings.js"));
 
 app.get("/*splat", (req, res) => {
     if (req.accepts('application/json')) {
