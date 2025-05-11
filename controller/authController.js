@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
 const RegisterUser = async (req, res) => {
   const { email, name, password } = req.body;
@@ -22,6 +23,35 @@ const RegisterUser = async (req, res) => {
   }
 };
 
+const LoginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "email and password are required." });
+  }
+
+  const foundUser = await User.findOne({ email: email }).exec();
+  if (!foundUser) return res.status(403).json({ message: "Unauthorized" });
+
+  const match = await bcrypt.compare(password, foundUser.password);
+  if (!match) return res.status(403).json({ message: "Unauthorized" });
+
+  let token
+  token = jwt.sign(
+    {
+      email: foundUser.email,
+      role: foundUser.role,
+    },
+    process.env.SECRET,
+    { expiresIn: "1d" }
+  );
+
+  res.status(200).json({
+    token: token
+  })
+}
+
 module.exports = {
-  RegisterUser
+  RegisterUser,
+  LoginUser,
 };
