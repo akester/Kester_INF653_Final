@@ -1,0 +1,15 @@
+applications:
+  express:
+    type: 'nodejs:22'
+
+    web:
+      commands:
+        start: make
+      
+      locations:
+        '/':
+          root: ''
+          passthru: true
+
+    hooks:
+      build: make depends
