@@ -1,6 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 const RequireUserAuth = (req, res, next) => {
+    if (!req.headers.authorization) {
+        console.error('auth error: no token')
+        return res.status(401).json({ message: "Authorization required." });
+    }
+    
     // Read the token out of the header
     const token = req.headers.authorization.split(' ')[1];
 
