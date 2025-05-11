@@ -15,5 +15,5 @@ applications:
       build: make depends
 
     mounts: 
-      '/app/logs':
+      'logs':
         source: 'tmp'
