@@ -13,3 +13,7 @@ applications:
 
     hooks:
       build: make depends
+
+services:
+  mongo:
+    type: mongodb-enterprise:7.0
