@@ -39,7 +39,7 @@ app.use("/api/bookings", require("./routes/api/bookings.js"));
 
 // Handle 404's
 app.get("/*splat", (req, res) => {
-    if (req.accepts('application/json')) {
+    if (req.accepts('json')) {
         res.send({"error": "404 Not Found"});
         res.statusCode = 404;
         return
