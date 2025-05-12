@@ -3,6 +3,7 @@ const Booking = require('../models/booking');
 const User = require('../models/user');
 const jwt = require("jsonwebtoken");
 
+// Get a user ID from a request's JWT
 const getUser = (req) => {
     if (!req.headers.authorization) {
         throw new Error("unable to get user, no token")
@@ -21,6 +22,7 @@ const getUser = (req) => {
     return decodedToken.id;
 }
 
+// Create a new booking for the current user
 const CreateBooking = async (req, res) => {
     const userId = getUser(req);
 
@@ -56,6 +58,7 @@ const CreateBooking = async (req, res) => {
     }
 }
 
+// Get all bookings for the current user.
 const GetAllBookings = async (req, res) => {
     const userId = getUser(req);
 
@@ -71,6 +74,7 @@ const GetAllBookings = async (req, res) => {
     }
 }
 
+// Get a single booking
 const GetBooking = async (req, res) => {
     const { id } = req.params;
 

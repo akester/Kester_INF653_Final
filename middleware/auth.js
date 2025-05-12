@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 
+// Check a JWT that a user is logged in as a user.
 const RequireUserAuth = (req, res, next) => {
     if (!req.headers.authorization) {
         console.error('auth error: no token')
         return res.status(401).json({ message: "Authorization required." });
     }
-    
+
     // Read the token out of the header
     const token = req.headers.authorization.split(' ')[1];
 
@@ -25,6 +26,7 @@ const RequireUserAuth = (req, res, next) => {
     next()
 }
 
+// Check a JWT that a user is logged in as an admin.
 const RequireAdminAuth = (req, res, next) => {
     if (!req.headers.authorization) {
         console.error('auth error: no token')

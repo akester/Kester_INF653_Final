@@ -32,10 +32,12 @@ app.use("/data", express.static(path.join(__dirname, "data")));
 
 app.use("/", require("./routes/root.js"));
 
+// Routes for each API CRUD section
 app.use("/api/auth", require("./routes/api/auth.js"));
 app.use("/api/events", require("./routes/api/event.js"));
 app.use("/api/bookings", require("./routes/api/bookings.js"));
 
+// Handle 404's
 app.get("/*splat", (req, res) => {
     if (req.accepts('application/json')) {
         res.send({"error": "404 Not Found"});
@@ -48,6 +50,7 @@ app.get("/*splat", (req, res) => {
 
 app.use(errorHandler);
 
+// Open DB connection and listen
 mongoose.connection.once("open", () => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {
